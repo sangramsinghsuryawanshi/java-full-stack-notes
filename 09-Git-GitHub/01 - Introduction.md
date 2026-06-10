@@ -231,7 +231,7 @@ When you run `git commit`:
 - **Prevention:** Enforce Signed Commits (GPG keys) and Two-Factor Authentication (2FA) for all contributors.
     
 
-## 14. Debugging Guide
+## 14. Debugging Guides
 
 - **Error:** `fatal: refusing to merge unrelated histories`
     
