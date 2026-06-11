@@ -6,7 +6,7 @@ A remote repository is a version of your project that is hosted on the internet 
 
 ### Purpose
 
-While Git is a local version control system, software engineering is a team sport. Remotes act as the central source of truth. Without remotes, if your laptop crashes, your code is gone forever
+While Git is a local version control system, software engineering is a team sport. Remotes act as the central source of truth. Without remotes, if your laptop crashes, your code is gone forever.
 
 ### 5 Levels of Explanation
 
