@@ -33,7 +33,7 @@ Git is incredibly smart and can automatically merge files 99% of the time (even 
     
     - `<<<<<<< HEAD` (Start of your changes)
         
-    - `=======` (Separator)
+    - ======= (Separator)
         
     - `>>>>>>> branch-name` (End of their changes)
         

@@ -46,19 +46,19 @@ git init
 
 Since Git is heavily used via the Command Line Interface (CLI), mastering these basic Linux/Unix commands is mandatory for any developer.
 
-|**Command**|**Action**|**Example Output / Usage**|
-|---|---|---|
-|`pwd`|**P**rint **W**orking **D**irectory|`/d/projects/my-app`|
-|`ls`|**L**i**s**t files and folders|`index.html script.js styles.css`|
-|`mkdir <name>`|**M**a**k**e **dir**ectory|`mkdir notes` (Creates a folder named 'notes')|
-|`cd <name>`|**C**hange **d**irectory|`cd notes` (Moves into the 'notes' folder)|
-|`cd ..`|Go up one directory level|Moves you back to the parent folder|
-|`touch <file>`|Create an empty file|`touch text.txt`|
-|`cat <file>`|View file contents|`cat text.txt` (Prints text inside the file)|
-|`mv <old> <new>`|**M**o**v**e or rename a file|`mv old.txt new.txt`|
-|`cp <file> <copy>`|**C**o**p**y a file|`cp text.txt backup.txt`|
-|`rm <file>`|**R**e**m**ove (delete) a file|`rm text.txt` (Deletes permanently)|
-|`rm -r <folder>`|Remove a folder recursively|`rm -r notes` (Deletes folder and all its contents)|
+| **Command**        | **Action**                          | **Example Output / Usage**                          |
+| ------------------ | ----------------------------------- | --------------------------------------------------- |
+| `pwd`              | **P**rint **W**orking **D**irectory | `/d/projects/my-app`                                |
+| `ls`               | **L**i**s**t files and folders      | `index.html script.js styles.css`                   |
+| `mkdir <name>`     | **M**a**k**e **dir**ectory          | `mkdir notes` (Creates a folder named 'notes')      |
+| `cd <name>`        | **C**hange **d**irectory            | `cd notes` (Moves into the 'notes' folder)          |
+| `cd ..`            | Go up one directory level           | Moves you back to the parent folder                 |
+| `touch <file>`     | Create an empty file                | `touch text.txt`                                    |
+| `cat <file>`       | View file contents                  | `cat text.txt` (Prints text inside the file)        |
+| `mv <old> <new>`   | **M**o**v**e or rename a file       | `mv old.txt new.txt`                                |
+| `cp <file> <copy>` | **C**o**p**y a file                 | `cp text.txt backup.txt`                            |
+| `rm <file>`        | **R**e**m**ove (delete) a file      | `rm text.txt` (Deletes permanently)                 |
+| `rm -r <folder>`   | Remove a folder recursively         | `rm -r notes` (Deletes folder and all its contents) |
 
 ## 3. The Core Git Workflow
 

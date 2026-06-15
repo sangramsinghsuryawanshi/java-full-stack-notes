@@ -81,7 +81,7 @@ Let's break down exactly what the JVM does here:
     
 2. **Instantiation (`new Car()`):** The JVM allocates contiguous memory on the Heap for a new `Car` object, initializes its fields to default values, and runs the constructor.
     
-3. **Assignment (`=`):** The JVM takes the memory address of the newly created object in the Heap and stores it inside the `myCar` reference variable on the Stack.
+3. **Assignment (=):** The JVM takes the memory address of the newly created object in the Heap and stores it inside the `myCar` reference variable on the Stack.
     
 
 ### Multiple References
