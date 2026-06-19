@@ -26,7 +26,11 @@ Used for decision making.
 ## Syntax
 
 ```
-if(condition){    // code}else{    // code}
+if(condition)
+{    // code
+}else{    
+	// code
+}
 ```
 
 ---
@@ -34,13 +38,21 @@ if(condition){    // code}else{    // code}
 ## Example
 
 ```
-int age = 20;if(age >= 18){    System.out.println("Eligible");}else{    System.out.println("Not Eligible");}
+int age = 20;
+if(age >= 18)
+{    
+	System.out.println("Eligible");
+}else{    
+	System.out.println("Not Eligible");
+}
 ```
 
 ### Flow
 
 ```
-Condition    ↓True  → If BlockFalse → Else Block
+Condition    
+	↓
+True  → If BlockFalse → Else Block
 ```
 
 ---
