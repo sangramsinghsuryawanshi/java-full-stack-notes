@@ -57,10 +57,6 @@ Plaintext
              +------- (3. git fetch/pull upstream) ------------+
 ```
 
-### Interactive Open-Source Workflow Simulator
-
-To understand how code moves across this triangular topology, experiment with this visualizer:
-
 ## 4. Syntax & Commands
 
 ### Basic Syntax

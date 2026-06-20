@@ -96,15 +96,15 @@ Executing: User u = new User("Alice");
 
 ## Stack vs Heap Comparison
 
-|**Feature**|**Stack Memory**|**Heap Memory**|
-|---|---|---|
-|**Primary Purpose**|Method execution and local variables|Dynamic object storage|
-|**Visibility**|**Private:** Thread-local|**Global:** Shared across all threads|
-|**Data Structure**|LIFO (Last-In-First-Out)|Unordered / Tree-based structures|
-|**Access Speed**|Exceptionally Fast|Slower (requires pointer dereferencing)|
-|**Memory Management**|Automatic (handled by OS/CPU natively)|Handled by JVM Garbage Collector|
-|**Size**|Small (typically 1MB - 2MB per thread)|Massive (scales with physical RAM)|
-|**Size Configuration**|Configured via `-Xss`|Configured via `-Xms` (Initial) and `-Xmx` (Max)|
-|**Out of Memory Error**|`java.lang.StackOverflowError` (usually infinite recursion)|`java.lang.OutOfMemoryError` (memory leak or heavy load)|
+| **Feature**             | **Stack Memory**                                            | **Heap Memory**                                          |
+| ----------------------- | ----------------------------------------------------------- | -------------------------------------------------------- |
+| **Primary Purpose**     | Method execution and local variables                        | Dynamic object storage                                   |
+| **Visibility**          | **Private:** Thread-local                                   | **Global:** Shared across all threads                    |
+| **Data Structure**      | LIFO (Last-In-First-Out)                                    | Unordered / Tree-based structures                        |
+| **Access Speed**        | Exceptionally Fast                                          | Slower (requires pointer dereferencing)                  |
+| **Memory Management**   | Automatic (handled by OS/CPU natively)                      | Handled by JVM Garbage Collector                         |
+| **Size**                | Small (typically 1MB - 2MB per thread)                      | Massive (scales with physical RAM)                       |
+| **Size Configuration**  | Configured via `-Xss`                                       | Configured via `-Xms` (Initial) and `-Xmx` (Max)         |
+| **Out of Memory Error** | `java.lang.StackOverflowError` (usually infinite recursion) | `java.lang.OutOfMemoryError` (memory leak or heavy load) |
 
 > **Architect's Insight:** Modern JVMs implement **Escape Analysis**. If the JIT compiler determines that an object created inside a method never "escapes" that method (i.e., it is not returned or passed to another thread), the JVM may physically unpack the object and allocate its fields directly on the **Stack** instead of the Heap. This completely bypasses the Garbage Collector and drastically improves performance.
