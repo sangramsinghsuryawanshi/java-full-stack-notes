@@ -59,7 +59,11 @@ class Main is public, should be declared in a file named Main.java
 A basic Java program contains:
 
 ```
-public class Main {    public static void main(String[] args) {        System.out.println("Hello World");    }}
+public class Main {    
+public static void main(String[] args) {        
+		System.out.println("Hello World");    
+	}
+}
 ```
 
 ---
@@ -161,7 +165,11 @@ Stores command-line arguments.
 # First Java Program
 
 ```
-public class Main {    public static void main(String[] args) {        System.out.println("Hello, World!");    }}
+public class Main {    
+	public static void main(String[] args) {        
+		System.out.println("Hello, World!");    
+	}
+}
 ```
 
 ---
@@ -183,7 +191,11 @@ Main.java
 ```
 
 ```
-public class Main {    public static void main(String[] args) {        System.out.println("Hello World");    }}
+public class Main {    
+	public static void main(String[] args) {        
+		System.out.println("Hello World");    
+	}
+}
 ```
 
 ↓
@@ -229,7 +241,15 @@ Hello World
 # Flow Diagram
 
 ```
-Java Source Code(Main.java)       │       ▼Java Compiler (javac)       │       ▼Bytecode(Main.class)       │       ▼JVM       │       ▼Output
+Java Source Code(Main.java)       
+		│       
+▼Java Compiler (javac)       
+		│       
+▼Bytecode(Main.class)       
+		│       
+	  ▼JVM       
+	    │       
+	 ▼Output
 ```
 
 ---
@@ -317,7 +337,13 @@ Welcome to Java
 ### Print Multiple Lines
 
 ```
-public class Main {    public static void main(String[] args) {        System.out.println("Java");        System.out.println("Full Stack");        System.out.println("Developer");    }}
+public class Main {    
+	public static void main(String[] args) {        
+			System.out.println("Java");        
+			System.out.println("Full Stack");
+			System.out.println("Developer");    
+	}
+}
 ```
 
 Output:
@@ -450,5 +476,15 @@ java ClassName
 ### Quick Revision
 
 ```
-Write Code → Save as .java        ↓Compile using javac        ↓Generate .class file        ↓Run using java command        ↓JVM Executes        ↓Output Displayed
+Write Code → Save as .java        
+	↓
+Compile using javac        
+	↓
+Generate .class file        
+	↓
+Run using java command        
+	↓
+JVM Executes        
+	↓
+Output Displayed
 ```

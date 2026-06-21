@@ -25,7 +25,9 @@ Programming languages help humans communicate with computers in a readable and u
 ## Problem Without Programming Languages
 
 ```
-Human   ↓Binary Language(0s and 1s)
+Human   
+  ↓
+Binary Language(0s and 1s)
 ```
 
 Very difficult to write and understand.
@@ -41,7 +43,15 @@ Example:
 ## With Programming Languages
 
 ```
-Human   ↓Programming Language   ↓Compiler / Interpreter   ↓Machine Code   ↓Computer
+Human   
+ ↓
+Programming Language   
+ ↓
+Compiler / Interpreter   
+ ↓
+Machine Code   
+ ↓
+Computer
 ```
 
 ---
@@ -73,7 +83,15 @@ Human   ↓Programming Language   ↓Compiler / Interpreter   ↓Machine Code   
 ## Execution Flow
 
 ```
-Main.java    ↓  javac    ↓Main.class    ↓   JVM    ↓ Output
+Main.java    
+	↓  
+  javac    
+	↓
+Main.class    
+	↓   
+   JVM    
+	↓ 
+  Output
 ```
 
 ---
@@ -83,7 +101,11 @@ Main.java    ↓  javac    ↓Main.class    ↓   JVM    ↓ Output
 Create a file:
 
 ```
-public class Main {    public static void main(String[] args) {        System.out.println("Hello Java");    }}
+public class Main {    
+	public static void main(String[] args) {        
+		System.out.println("Hello Java");    
+	}
+}
 ```
 
 File Name:
@@ -149,7 +171,12 @@ A `.java` file contains human-readable Java source code.
 ## Example
 
 ```
-public class Main {    public static void main(String[] args) {        System.out.println("Hello");    }}
+public class Main 
+{    
+	public static void main(String[] args) {        
+		System.out.println("Hello");    
+	}
+}
 ```
 
 ---
@@ -234,7 +261,15 @@ Java does not compile directly into machine code.
 Instead:
 
 ```
-Java Source Code      ↓   Compiler      ↓   Bytecode      ↓      JVM      ↓ Machine Code
+Java Source Code      
+	↓   
+Compiler      
+	↓   
+Bytecode      
+	↓      
+   JVM      
+   ↓ 
+Machine Code
 ```
 
 ---
@@ -244,7 +279,11 @@ Java Source Code      ↓   Compiler      ↓   Bytecode      ↓      JVM      
 ### Windows
 
 ```
-Bytecode   ↓ Windows JVM   ↓Output
+Bytecode   
+   ↓ 
+Windows JVM   
+   ↓
+Output
 ```
 
 ---
@@ -252,7 +291,11 @@ Bytecode   ↓ Windows JVM   ↓Output
 ### Linux
 
 ```
-Bytecode   ↓ Linux JVM   ↓Output
+Bytecode   
+   ↓ 
+Linux JVM   
+   ↓
+Output
 ```
 
 ---
@@ -260,7 +303,11 @@ Bytecode   ↓ Linux JVM   ↓Output
 ### macOS
 
 ```
-Bytecode   ↓ macOS JVM   ↓Output
+Bytecode   
+   ↓ 
+macOS JVM   
+   ↓
+Output
 ```
 
 ---
