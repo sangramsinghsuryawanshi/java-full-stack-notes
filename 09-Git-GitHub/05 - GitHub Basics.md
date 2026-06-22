@@ -53,10 +53,6 @@ Local Machine Workspace                        GitHub Server (origin)
                            <--- (git pull) ----
 ```
 
-### Interactive Remote Synchronization Simulator
-
-To understand how commits move across the network, experiment with this synchronization simulator:
-
 ## 4. Syntax & Commands
 
 ### Basic Syntax

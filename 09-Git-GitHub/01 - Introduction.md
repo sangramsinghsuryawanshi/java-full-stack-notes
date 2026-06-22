@@ -65,8 +65,6 @@ Working Directory        Staging Area (Index)         Local Repository (.git)   
        | <--------------------------------- git pull ------------------------------------------ |
 ```
 
-To help visualize how Git branches and commits form a Directed Acyclic Graph (DAG), you can explore this interactive Git Tree model:
-
 ## 4. Syntax & Commands
 
 ### Basic Syntax

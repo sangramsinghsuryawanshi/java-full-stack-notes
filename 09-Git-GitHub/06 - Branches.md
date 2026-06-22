@@ -56,8 +56,6 @@ C1 --- C2           C6 (Merge Commit)
           (Main Branch)
 ```
 
-To truly understand how commits form a tree structure and how `HEAD` moves, explore this interactive Branching and Merging Simulator:
-
 ## 4. Syntax & Commands
 
 ### Basic Syntax
