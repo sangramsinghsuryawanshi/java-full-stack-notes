@@ -13,7 +13,7 @@ JDK > JRE > JVM
 This means:
 
 ```
-JDK contains JREJRE contains JVM
+JDK contains JRE, JRE contains JVM
 ```
 
 ---
@@ -71,7 +71,8 @@ JVM removes unused objects from memory.
 Example:
 
 ```
-Student s = new Student();s = null;
+Student s = new Student();
+s = null;
 ```
 
 Object becomes eligible for garbage collection.
@@ -97,7 +98,15 @@ Prevents malicious code from running.
 # JVM Architecture (Simplified)
 
 ```
-.class File     │     ▼Class Loader     │     ▼Bytecode Verifier     │     ▼Execution Engine     │     ▼Output
+.class File     
+	│     
+▼Class Loader     
+	│     
+▼Bytecode Verifier     
+	│     
+▼Execution Engine     
+	│    
+ ▼Output
 ```
 
 ---
@@ -168,7 +177,7 @@ Predefined classes and packages.
 Examples:
 
 ```
-java.langjava.utiljava.iojava.sql
+java.lang, java.util, java.io, java.sql
 ```
 
 ---
