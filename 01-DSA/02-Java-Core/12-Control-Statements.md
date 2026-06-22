@@ -566,7 +566,9 @@ Because iterations are known.
 # Example: ATM System
 
 ```
-while(choice != 0) {    // Show Menu}
+while(choice != 0) {    
+// Show Menu
+}
 ```
 
 ✅ Recommended
