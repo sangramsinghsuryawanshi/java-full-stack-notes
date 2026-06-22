@@ -313,7 +313,39 @@ char ch = sc.next().charAt(0);if(ch >= 'A' && ch <= 'Z'){    System.out.println(
 ### Example
 
 ```
+<<<<<<< HEAD
 0 1 1 2 3 5 8 13
+=======
+for(int i = 1; i <= 100; i++) {    System.out.println(i);}
+```
+
+✅ Recommended
+
+Because iterations are known.
+
+---
+
+# Example: ATM System
+
+```
+while(choice != 0) {    
+// Show Menu
+}
+```
+
+✅ Recommended
+
+Because user decides when to exit.
+
+---
+
+# Real-Life Examples
+
+### While Loop
+
+```
+ATM SystemMenu Driven ProgramsLogin SystemGame LoopRead Input Until Exit
+>>>>>>> git-github-notes
 ```
 
 ---
