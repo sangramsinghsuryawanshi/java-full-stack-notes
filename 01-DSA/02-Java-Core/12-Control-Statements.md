@@ -62,7 +62,13 @@ True  → If BlockFalse → Else Block
 ## Syntax
 
 ```
-if(condition1){}else if(condition2){}else{}
+if(condition1){
+
+}else if(condition2){
+
+}else{
+
+}
 ```
 
 ---
