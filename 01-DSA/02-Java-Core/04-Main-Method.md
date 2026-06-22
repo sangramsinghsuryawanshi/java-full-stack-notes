@@ -11,7 +11,8 @@ Without a valid `main()` method, a Java application cannot run.
 # Syntax of Main Method
 
 ```
-public static void main(String[] args){    }
+public static void main(String[] args){
+}
 ```
 
 ---
@@ -19,7 +20,11 @@ public static void main(String[] args){    }
 # Complete Example
 
 ```
-public class Main {    public static void main(String[] args) {        System.out.println("Hello Java");    }}
+public class Main {    
+	public static void main(String[] args) {        
+		System.out.println("Hello Java");    
+	}
+}
 ```
 
 ### Output
@@ -106,7 +111,8 @@ public void main(String[] args){}
 JVM would need:
 
 ```
-Main obj = new Main();obj.main(args);
+Main obj = new Main();
+obj.main(args);
 ```
 
 This creates a circular dependency because JVM would need an object before the program starts.
@@ -132,7 +138,9 @@ The main method performs execution but does not return anything.
 ### Example
 
 ```
-public static void main(String[] args) {    System.out.println("Java");}
+public static void main(String[] args) {    
+	System.out.println("Java");
+}
 ```
 
 Output:
@@ -231,7 +239,7 @@ java Main Java FullStack Developer
 Arguments received:
 
 ```
-JavaFullStackDeveloper
+JavaFullStack Developer
 ```
 
 ---
@@ -239,7 +247,13 @@ JavaFullStackDeveloper
 # Example Program
 
 ```
-public class Main {    public static void main(String[] args) {        System.out.println(args[0]);        System.out.println(args[1]);        System.out.println(args[2]);    }}
+public class Main {    
+	public static void main(String[] args) {        
+		System.out.println(args[0]);        
+		System.out.println(args[1]);        
+		System.out.println(args[2]);    
+	}
+}
 ```
 
 Run:
@@ -281,7 +295,11 @@ Third argument
 # Finding Number of Arguments
 
 ```
-public class Main {    public static void main(String[] args) {        System.out.println(args.length);    }}
+public class Main {    
+	public static void main(String[] args) {        
+		System.out.println(args.length);    
+	}
+}
 ```
 
 Run:
@@ -301,7 +319,17 @@ Output:
 # Execution Flow of main()
 
 ```
-User Runs Program        │        ▼JVM Starts        │        ▼Loads Class        │        ▼Finds main()        │        ▼Executes Statements        │        ▼Program Ends
+User Runs Program        
+		│        
+	▼JVM Starts        
+		│        
+	▼Loads Class        
+		│        
+	▼Finds main()        
+		│        
+	▼Executes Statements        
+		│        
+	▼Program Ends
 ```
 
 ---
@@ -337,7 +365,9 @@ Main method is not static
 Wrong:
 
 ```
-public static int main(String[] args){    return 0;}
+public static int main(String[] args){    
+	return 0;
+}
 ```
 
 Error:

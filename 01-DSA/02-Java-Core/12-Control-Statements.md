@@ -76,7 +76,14 @@ if(condition1){
 ## Example
 
 ```
-int marks = 75;if(marks >= 90){    System.out.println("A");}else if(marks >= 70){    System.out.println("B");}else{    System.out.println("C");}
+int marks = 75;
+if(marks >= 90){    
+	System.out.println("A");
+}else if(marks >= 70){    
+	System.out.println("B");
+}else{    
+	System.out.println("C");
+}
 ```
 
 ---
@@ -90,7 +97,7 @@ A loop repeatedly executes a block of code.
 ### Types
 
 ```
-for loopwhile loopdo while loop
+for loop, while loop, do while loop
 ```
 
 ---
@@ -108,7 +115,9 @@ for(initialization; condition; update){}
 ## Example
 
 ```
-for(int i=1;i<=5;i++){    System.out.println(i);}
+for(int i=1;i<=5;i++){    
+	System.out.println(i);
+}
 ```
 
 Output:
@@ -140,7 +149,10 @@ while(condition){}
 ## Example
 
 ```
-int i = 1;while(i <= 5){    System.out.println(i);    i++;}
+int i = 1;while(i <= 5){    
+	System.out.println(i);    
+	i++;
+}
 ```
 
 ---
@@ -152,7 +164,7 @@ When number of iterations is unknown.
 Example:
 
 ```
-ATM SystemMenu Driven ProgramUser Input Based Program
+ATM System Menu Driven Program User Input Based Program
 ```
 
 ---
@@ -162,7 +174,8 @@ ATM SystemMenu Driven ProgramUser Input Based Program
 ## Syntax
 
 ```
-do{}while(condition);
+do{
+}while(condition);
 ```
 
 ---
@@ -170,7 +183,11 @@ do{}while(condition);
 ## Example
 
 ```
-int i = 1;do{    System.out.println(i);    i++;}while(i <= 5);
+int i = 1;
+do{    
+	System.out.println(i);    
+	i++;
+}while(i <= 5);
 ```
 
 ---
@@ -192,7 +209,7 @@ Loop executes at least one time.
 ### Example
 
 ```
-Print 1 to 100 → For LoopATM Menu → While Loop
+Print 1 to 100 → For Loop ATM Menu → While Loop
 ```
 
 ---
@@ -209,7 +226,11 @@ Print 1 to 100 → For LoopATM Menu → While Loop
 ## Example
 
 ```
-int num = 10;while(num < 5){    System.out.println("Hello");}
+int num = 10;
+while(num < 5)
+{    
+	System.out.println("Hello");
+}
 ```
 
 Output:
@@ -221,7 +242,10 @@ Nothing
 ---
 
 ```
-int num = 10;do{    System.out.println("Hello");}while(num < 5);
+int num = 10;
+do{    
+	System.out.println("Hello");
+}while(num < 5);
 ```
 
 Output:
@@ -241,7 +265,12 @@ Hello
 ### Logic
 
 ```
-Input AInput BIf A > B    Print AElse    Print B
+Input A
+Input B
+If A > B    
+	Print A
+Else    
+	Print B
 ```
 
 ---
