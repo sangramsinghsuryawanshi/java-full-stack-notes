@@ -480,3 +480,652 @@ public static void main(String[] args)public  → JVM can access itstatic  → N
 - `main` is the special method name recognized by JVM.
 - `String[] args` stores command-line arguments.
 - One of the most frequently asked Java interview questions is: **"Why is main() static?"** → Because JVM must execute it without creating an object.
+
+
+# 2. Introduction to Methods
+
+## What is a Method?
+
+A **method** is a block of reusable code that performs a specific task.
+
+Instead of writing the same code multiple times, we write it once inside a method and call it whenever needed.
+
+---
+
+## Why Do We Need Methods?
+
+Without methods:
+
+```
+System.out.println("Welcome");System.out.println("Welcome");System.out.println("Welcome");
+```
+
+With methods:
+
+```
+printMessage();printMessage();printMessage();
+```
+
+Advantages:
+
+- Code Reusability
+- Easy Maintenance
+- Better Readability
+- Reduces Code Duplication
+- Easy Debugging
+
+---
+
+# Real-Life Example
+
+Think of a TV remote.
+
+Each button performs a specific task.
+
+```
+Volume Up → increaseVolume()Volume Down → decreaseVolume()Power → turnOn()Mute → mute()
+```
+
+Similarly, methods perform specific tasks.
+
+---
+
+# 2. Syntax of a Method
+
+## General Syntax
+
+```
+accessModifier returnType methodName(parameters){    // method body}
+```
+
+---
+
+## Example
+
+```
+public static void greet(){    System.out.println("Welcome to Java");}
+```
+
+---
+
+## Components of a Method
+
+```
+public static void greet(){}
+```
+
+|Part|Description|
+|---|---|
+|public|Access Modifier|
+|static|Can be called without creating an object|
+|void|Returns nothing|
+|greet|Method Name|
+|()|Parameters|
+|{}|Method Body|
+
+---
+
+# Calling a Method
+
+```
+public class Main {    static void greet(){        System.out.println("Hello");    }    public static void main(String[] args){        greet();    }}
+```
+
+Output
+
+```
+Hello
+```
+
+---
+
+# Method Execution Flow
+
+```
+main()   ↓greet()   ↓Print Message   ↓Return to main()
+```
+
+---
+
+# 3. Methods with Parameters
+
+## Definition
+
+Parameters allow values to be passed into methods.
+
+---
+
+## Syntax
+
+```
+static void display(String name){}
+```
+
+---
+
+## Example
+
+```
+public class Main {    static void greet(String name){        System.out.println("Hello " + name);    }    public static void main(String[] args){        greet("John");        greet("Alice");    }}
+```
+
+Output
+
+```
+Hello JohnHello Alice
+```
+
+---
+
+# Multiple Parameters
+
+```
+static void student(String name, int age){    System.out.println(name + " " + age);}
+```
+
+Calling
+
+```
+student("Rahul",22);
+```
+
+Output
+
+```
+Rahul 22
+```
+
+---
+
+# Parameter vs Argument
+
+|Parameter|Argument|
+|---|---|
+|Variable in method definition|Actual value passed|
+|Placeholder|Real Data|
+
+Example
+
+```
+void add(int a,int b)
+```
+
+Here
+
+```
+a,b
+```
+
+are Parameters.
+
+Calling
+
+```
+add(10,20);
+```
+
+Here
+
+```
+10,20
+```
+
+are Arguments.
+
+---
+
+# 4. Returning Values
+
+## Definition
+
+Some methods return a value after completing their work.
+
+---
+
+## Syntax
+
+```
+return value;
+```
+
+---
+
+## Example
+
+```
+static int sum(int a,int b){    return a+b;}
+```
+
+Calling
+
+```
+int result = sum(10,20);System.out.println(result);
+```
+
+Output
+
+```
+30
+```
+
+---
+
+# Return Types
+
+|Return Type|Meaning|
+|---|---|
+|void|Returns nothing|
+|int|Integer value|
+|double|Decimal value|
+|boolean|true or false|
+|char|Character|
+|String|Text|
+
+---
+
+# Example Returning String
+
+```
+static String country(){    return "India";}
+```
+
+Calling
+
+```
+System.out.println(country());
+```
+
+Output
+
+```
+India
+```
+
+---
+
+# Example Returning Boolean
+
+```
+static boolean isAdult(int age){    return age>=18;}
+```
+
+Calling
+
+```
+System.out.println(isAdult(20));
+```
+
+Output
+
+```
+true
+```
+
+---
+
+# 5. Method Scope
+
+## Definition
+
+Variables declared inside a method exist only inside that method.
+
+---
+
+## Example
+
+```
+static void test(){    int x = 10;}
+```
+
+Outside the method:
+
+```
+System.out.println(x);
+```
+
+Output
+
+```
+Compilation Error
+```
+
+Reason:
+
+Variable `x` exists only inside `test()`.
+
+---
+
+# Method Scope Diagram
+
+```
+main()↓test()↓x exists only here↓Method Ends↓x destroyed
+```
+
+---
+
+# 6. Block Scope
+
+## Definition
+
+Variables declared inside `{}` exist only inside that block.
+
+---
+
+## Example
+
+```
+if(true){    int age = 20;    System.out.println(age);}
+```
+
+Outside block
+
+```
+System.out.println(age);
+```
+
+Output
+
+```
+Compilation Error
+```
+
+---
+
+# Block Scope Diagram
+
+```
+{age exists}↓Destroyed
+```
+
+---
+
+# 7. Loop Scope
+
+## Definition
+
+Variables declared inside loops exist only inside that loop.
+
+---
+
+## Example
+
+```
+for(int i=1;i<=5;i++){    System.out.println(i);}
+```
+
+Outside loop
+
+```
+System.out.println(i);
+```
+
+Output
+
+```
+Compilation Error
+```
+
+---
+
+# Example
+
+```
+while(true){    int x = 5;}
+```
+
+Outside
+
+```
+System.out.println(x);
+```
+
+Invalid.
+
+---
+
+# Loop Scope Diagram
+
+```
+Loop Starts↓Variable Created↓Loop Ends↓Variable Destroyed
+```
+
+---
+
+# 8. Shadowing
+
+## Definition
+
+When a local variable has the same name as a class variable, the local variable hides (shadows) the class variable.
+
+---
+
+## Example
+
+```
+public class Main {    static int x = 90;    public static void main(String[] args){        System.out.println(x);        int x = 40;        System.out.println(x);    }}
+```
+
+Output
+
+```
+9040
+```
+
+Explanation:
+
+- Before local declaration, `x` refers to the class variable.
+- After local declaration, the local `x` shadows the class variable.
+
+---
+
+# Shadowing Diagram
+
+```
+Class Variablex = 90↓Local Variablex = 40↓Local variable takes priority
+```
+
+---
+
+# 9. Variable Arguments (Varargs)
+
+## Definition
+
+Varargs allow a method to accept any number of arguments.
+
+---
+
+## Syntax
+
+```
+static void fun(int... numbers){}
+```
+
+---
+
+## Example
+
+```
+static void sum(int... nums){    for(int n : nums){        System.out.print(n+" ");    }}
+```
+
+Calling
+
+```
+sum(10);sum(10,20);sum(10,20,30,40);
+```
+
+Output
+
+```
+1010 2010 20 30 40
+```
+
+---
+
+## Rules
+
+- Only one varargs parameter is allowed.
+- It must be the last parameter.
+
+Valid
+
+```
+void display(String name,int... marks)
+```
+
+Invalid
+
+```
+void display(int... marks,String name)
+```
+
+---
+
+# 10. Method Overloading
+
+## Definition
+
+Method Overloading means creating multiple methods with the same name but different parameter lists.
+
+---
+
+## Why?
+
+It improves readability and allows similar operations with different inputs.
+
+---
+
+## Example
+
+```
+static int sum(int a,int b){    return a+b;}static int sum(int a,int b,int c){    return a+b+c;}
+```
+
+Calling
+
+```
+System.out.println(sum(10,20));System.out.println(sum(10,20,30));
+```
+
+Output
+
+```
+3060
+```
+
+---
+
+# Another Example
+
+```
+static void print(int num){    System.out.println(num);}static void print(String text){    System.out.println(text);}
+```
+
+---
+
+# Overloading Rules
+
+Method overloading requires different:
+
+- Number of parameters
+- Types of parameters
+- Order of parameter types
+
+---
+
+## Invalid Overloading
+
+Changing only the return type is **not** overloading.
+
+```
+int sum(int a,int b)
+```
+
+```
+double sum(int a,int b)
+```
+
+❌ Compilation Error
+
+---
+
+# Method Overloading Diagram
+
+```
+sum()↓sum(int,int)↓sum(int,int,int)↓sum(double,double)
+```
+
+---
+
+# Common Interview Questions
+
+### 1. What is a Method?
+
+A reusable block of code that performs a specific task.
+
+---
+
+### 2. Why do we use Methods?
+
+- Reusability
+- Readability
+- Easy Maintenance
+- Reduced Code Duplication
+
+---
+
+### 3. What is the difference between Parameter and Argument?
+
+|Parameter|Argument|
+|---|---|
+|Declared in method|Passed while calling|
+
+---
+
+### 4. What is a Return Type?
+
+The type of value returned by a method.
+
+---
+
+### 5. What is `void`?
+
+A method with `void` does not return any value.
+
+---
+
+### 6. What is Scope?
+
+The region where a variable is accessible.
+
+---
+
+### 7. What is Shadowing?
+
+A local variable hides a class variable having the same name.
+
+---
+
+### 8. What are Varargs?
+
+A feature that allows methods to accept a variable number of arguments using `...`.
+
+---
+
+### 9. What is Method Overloading?
+
+Creating multiple methods with the same name but different parameter lists.
+
+---
+
+### 10. Can we overload methods by changing only the return type?
+
+**No.** The parameter list must be different.
+
+---
+
+# Quick Revision
+
+```
+Method ↓Reusable Block of CodeMethod Call ↓Executes MethodParameters ↓Input VariablesArguments ↓Actual ValuesReturn ↓Sends Result BackMethod Scope ↓Inside Method OnlyBlock Scope ↓Inside {}Loop Scope ↓Inside Loop OnlyShadowing ↓Local Variable Hides Class VariableVarargs ↓Accept Multiple ArgumentsMethod Overloading ↓Same Method NameDifferent Parameters
+```
