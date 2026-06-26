@@ -149,3 +149,149 @@ public class PassByValueProof {
 ### Why this matters in System Design
 
 Because Java passes copies of references, it is impossible to write a standard `swap(Object a, Object b)` method in Java like you can in C++. This strictly protects the caller's reference variables from being hijacked or overwritten by malicious or poorly written downstream methods.
+
+# 6. == vs .equals() in Java
+
+## Introduction
+
+Java provides two ways to compare values:
+
+```
+==
+```
+
+and
+
+```
+.equals()
+```
+
+Many beginners get confused between them.
+
+---
+
+# What is == ?
+
+== compares references (memory addresses) for objects.
+
+For primitive data types, it compares actual values.
+
+---
+
+## Example with Primitive Types
+
+```
+int a = 10;
+int b = 10;
+System.out.println(a == b);
+```
+
+Output:
+
+```
+true
+```
+
+Because both values are equal.
+
+---
+
+## Example with Strings
+
+```
+String s1 = new String("Java");
+String s2 = new String("Java");
+System.out.println(s1 == s2);
+```
+
+Output:
+
+```
+false
+```
+
+Why?
+
+Because `s1` and `s2` are different objects in memory.
+
+---
+
+# What is .equals()?
+
+`.equals()` compares actual content (values) of objects.
+
+---
+
+## Example
+
+```
+String s1 = new String("Java");
+String s2 = new String("Java");
+System.out.println(s1.equals(s2));
+```
+
+Output:
+
+```
+true
+```
+
+Because both strings contain:
+
+```
+Java
+```
+
+---
+
+# Comparison Table
+
+|==|.equals()|
+|---|---|
+|Compares references|Compares content|
+|Used for primitives|Used for objects|
+|Faster|Checks actual values|
+|Can give unexpected results with Strings|Recommended for Strings|
+
+---
+
+# Interview Question
+
+### Which should be used for String comparison?
+
+✅ Use:
+
+```
+str1.equals(str2)
+```
+
+❌ Avoid:
+
+```
+str1 == str2
+```
+
+---
+
+# Example
+
+```
+String name = "Java";
+if(name.equals("Java")) {    
+	System.out.println("Matched");
+}
+```
+
+Output:
+
+```
+Matched
+```
+
+---
+
+# Quick Revision
+
+```
+==Primitive → Value ComparisonObject → Reference Comparison.equals()Object Content Comparison
+```
