@@ -1,405 +1,123 @@
-## Introduction
 
-In real-world programs, decisions need to be made based on conditions.
+# 1. Conditions
 
-Examples:
+## What are Conditions?
 
-- Check if a student passed or failed.
-- Check if a person is eligible to vote.
-- Check if a user entered the correct password.
-
-Java provides the **if statement** for decision-making.
-
----
-
-# Definition
-
-The **if statement** executes a block of code only when a specified condition is true.
-
----
-
-# Syntax
+Conditions are expressions that evaluate to:
 
 ```
-if(condition) {}
+true false
 ```
-
----
-
-# Flow Diagram
-
-```
-Condition    ↓ True → Execute Block False → Skip Block
-```
-
----
-
-# Example 1: Voting Eligibility
-
-```
-int age = 20;if(age >= 18) {    System.out.println("Eligible");}
-```
-
-Output:
-
-```
-Eligible
-```
-
----
-
-# How It Works?
-
-```
-age = 20Condition:20 >= 18True ↓Execute Statement
-```
-
----
-
-# Example 2: Condition False
-
-```
-int age = 15;if(age >= 18) {    System.out.println("Eligible");}
-```
-
-Output:
-
-```
-(No Output)
-```
-
-Because:
-
-```
-15 >= 18False ↓Skipped
-```
-
----
-
-# Using Multiple Statements
-
-```
-int marks = 80;if(marks >= 40) {    System.out.println("Passed");    System.out.println("Congratulations");}
-```
-
-Output:
-
-```
-PassedCongratulations
-```
-
----
-
-# Relational Operators Used in if
-
-|Operator|Meaning|
-|---|---|
-|>|Greater Than|
-|<|Less Than|
-|>=|Greater Than or Equal|
-|<=|Less Than or Equal|
-|==|Equal To|
-|!=|Not Equal To|
-
----
-
-# Example
-
-```
-int number = 10;if(number == 10) {    System.out.println("Correct");}
-```
-
-Output:
-
-```
-Correct
-```
-
----
-
-# Common Beginner Mistake
-
-Wrong:
-
-```
-if(age = 18)
-```
-
-❌ Invalid
-
-Correct:
-
-```
-if(age == 18)
-```
-
-✅ Valid
-
----
-
-# Real-Life Examples
-
-## ATM Withdrawal
-
-```
-if(balance >= amount) {    System.out.println("Withdrawal Successful");}
-```
-
----
-
-## Login Validation
-
-```
-if(password.equals("admin123")) {    System.out.println("Login Successful");}
-```
-
----
-
-# Interview Questions
-
-### Q1. What is an if statement?
-
-**Answer:**  
-An if statement executes a block of code only when a specified condition is true.
-
----
-
-### Q2. What happens if the condition is false?
-
-**Answer:**  
-The block is skipped.
-
----
-
-### Q3. Which operators are commonly used in if statements?
-
-**Answer:**
-
-```
-><>=<===!=
-```
-
----
-
-# Quick Revision
-
-```
-if(condition){    statements;}Condition    ↓True  → ExecuteFalse → Skip
-```
-
----
-
-# Summary
-
-- `if` is used for decision-making.
-- Executes code only when the condition is true.
-- False conditions skip execution.
-- Commonly used with relational operators.
-- One of the most important control statements in Java.
-
----
-
-# 13. While Loop in Java
-
-## Introduction
-
-A loop is used to execute a block of code repeatedly.
-
-The **while loop** continues executing as long as the condition remains true.
-
----
-
-# Definition
-
-A **while loop** repeatedly executes a block of code while the specified condition is true.
-
----
-
-# Syntax
-
-```
-while(condition) {}
-```
-
----
-
-# Flow Diagram
-
-```
-Condition    ↓ True → Execute Loop Body    ↑    | False → Exit Loop
-```
-
----
-
-# Example
-
-```
-int i = 1;while(i <= 5) {    System.out.println(i);    i++;}
-```
-
-Output:
-
-```
-12345
-```
-
----
-
-# Execution Flow
-
-```
-i = 11 <= 5 ✔Print 12 <= 5 ✔Print 23 <= 5 ✔Print 34 <= 5 ✔Print 45 <= 5 ✔Print 56 <= 5 ✘Stop
-```
-
----
-
-# Infinite Loop Example
-
-```
-while(true) {    System.out.println("Java");}
-```
-
-Output:
-
-```
-JavaJavaJava...
-```
-
-Runs forever until manually stopped.
-
----
-
-# Real-Life Example
-
-## Reading User Input
-
-```
-while(userChoice != 0) {    // Continue Program}
-```
-
----
-
-# Use When
-
-Use a while loop when:
-
-✅ Number of iterations is unknown.
-
-Examples:
-
-- ATM System
-- Menu-driven programs
-- Reading input until user exits
-- Login validation
-
----
-
-# Interview Questions
-
-### Q1. What is a while loop?
-
-**Answer:**  
-A loop that executes repeatedly while a condition is true.
-
----
-
-### Q2. When should we use a while loop?
-
-**Answer:**  
-When the number of iterations is unknown.
-
----
-
-### Q3. What causes an infinite loop?
-
-**Answer:**  
-When the condition never becomes false.
 
 Example:
 
 ```
-while(true) {}
+age >= 18
+num > 100
+marks < 35
+```
+
+Used for decision making.
+
+---
+
+# 2. If-Else Statement
+
+## Syntax
+
+```
+if(condition)
+{    // code
+}else{    
+	// code
+}
 ```
 
 ---
 
-# Quick Revision
+## Example
 
 ```
-while(condition){    statements;}Best For:✔ Unknown Iterations✔ Input Driven Programs✔ Menu Systems
+int age = 20;
+if(age >= 18)
+{    
+	System.out.println("Eligible");
+}else{    
+	System.out.println("Not Eligible");
+}
 ```
 
----
-
-# Summary
-
-- While loop is an entry-controlled loop.
-- Condition is checked before execution.
-- Runs repeatedly until the condition becomes false.
-- Best when iteration count is not known beforehand.
-
----
-
-# 14. For Loop in Java
-
-## Introduction
-
-The **for loop** is used when the number of iterations is known in advance.
-
-It combines initialization, condition, and update in one place.
-
----
-
-# Definition
-
-A **for loop** repeatedly executes a block of code for a known number of iterations.
-
----
-
-# Syntax
+### Flow
 
 ```
-for(initialization; condition; update) {}
+Condition    
+	↓
+True  → If BlockFalse → Else Block
 ```
 
 ---
 
-# Components
+# 3. Multiple If-Else
 
-## Initialization
-
-Runs once.
+## Syntax
 
 ```
-int i = 1;
-```
+if(condition1){
 
----
+}else if(condition2){
 
-## Condition
+}else{
 
-Checked before every iteration.
-
-```
-i <= 5
+}
 ```
 
 ---
 
-## Update
-
-Changes loop variable.
+## Example
 
 ```
-i++
+int marks = 75;
+if(marks >= 90){    
+	System.out.println("A");
+}else if(marks >= 70){    
+	System.out.println("B");
+}else{    
+	System.out.println("C");
+}
 ```
 
 ---
 
-# Example
+# 4. Loops
+
+## What is a Loop?
+
+A loop repeatedly executes a block of code.
+
+### Types
 
 ```
-for(int i = 1; i <= 5; i++) {    System.out.println(i);}
+for loop, while loop, do while loop
+```
+
+---
+
+# 5. For Loop
+
+## Syntax
+
+```
+for(initialization; condition; update){}
+```
+
+---
+
+## Example
+
+```
+for(int i=1;i<=5;i++){    
+	System.out.println(i);
+}
 ```
 
 Output:
@@ -410,150 +128,185 @@ Output:
 
 ---
 
-# Execution Flow
+## Flow
 
 ```
-Initialize i = 1      ↓Check Condition      ↓Execute Body      ↓Update i      ↓Repeat
-```
-
----
-
-# Example: Print 1 to 10
-
-```
-for(int i = 1; i <= 10; i++) {    System.out.println(i);}
+Initialize     ↓Condition     ↓Execute     ↓Update     ↓Condition
 ```
 
 ---
 
-# Example: Print Even Numbers
+# 6. While Loop
+
+## Syntax
 
 ```
-for(int i = 2; i <= 10; i += 2) {    System.out.println(i);}
+while(condition){}
+```
+
+---
+
+## Example
+
+```
+int i = 1;while(i <= 5){    
+	System.out.println(i);    
+	i++;
+}
+```
+
+---
+
+## Use Case
+
+When number of iterations is unknown.
+
+Example:
+
+```
+ATM System Menu Driven Program User Input Based Program
+```
+
+---
+
+# 7. Do While Loop
+
+## Syntax
+
+```
+do{
+}while(condition);
+```
+
+---
+
+## Example
+
+```
+int i = 1;
+do{    
+	System.out.println(i);    
+	i++;
+}while(i <= 5);
+```
+
+---
+
+## Important
+
+Loop executes at least one time.
+
+---
+
+# 8. For vs While
+
+|For Loop|While Loop|
+|---|---|
+|Known iterations|Unknown iterations|
+|Counter based|Condition based|
+|Compact syntax|More flexible|
+
+### Example
+
+```
+Print 1 to 100 → For Loop ATM Menu → While Loop
+```
+
+---
+
+# 9. While vs Do While
+
+|While|Do While|
+|---|---|
+|Checks condition first|Executes first|
+|May run 0 times|Runs at least 1 time|
+
+---
+
+## Example
+
+```
+int num = 10;
+while(num < 5)
+{    
+	System.out.println("Hello");
+}
 ```
 
 Output:
 
 ```
-246810
+Nothing
 ```
 
 ---
 
-# Real-Life Example
+```
+int num = 10;
+do{    
+	System.out.println("Hello");
+}while(num < 5);
+```
 
-Generate employee IDs:
+Output:
 
 ```
-for(int id = 1; id <= 100; id++) {    System.out.println(id);}
-```
-
----
-
-# Use When
-
-Use a for loop when:
-
-✅ Number of iterations is known.
-
-Examples:
-
-- Print 1 to 100
-- Process array elements
-- Generate reports
-- Perform repeated calculations
-
----
-
-# Interview Questions
-
-### Q1. What are the three parts of a for loop?
-
-**Answer:**
-
-```
-InitializationConditionUpdate
+Hello
 ```
 
 ---
 
-### Q2. When should we use a for loop?
-
-**Answer:**  
-When the number of iterations is known.
+# 10. Practice Problems
 
 ---
 
-### Q3. Is for loop entry-controlled?
+## Largest Number
 
-**Answer:** Yes.
-
-Condition is checked before execution.
-
----
-
-# Quick Revision
+### Logic
 
 ```
-for(initialization;    condition;    update){    statements;}Best For:✔ Known Iterations✔ Counting Tasks✔ Arrays
+Input A
+Input B
+If A > B    
+	Print A
+Else    
+	Print B
 ```
 
 ---
 
-# Summary
-
-- For loop is ideal for fixed repetitions.
-- Combines initialization, condition, and update.
-- Easy to read and maintain.
-- Most commonly used loop in Java.
-
----
-
-# 15. While Loop vs For Loop
-
-## Introduction
-
-Both `while` and `for` loops are used to repeat code execution.
-
-The choice depends on whether the number of iterations is known.
-
----
-
-# Comparison Table
-
-|While Loop|For Loop|
-|---|---|
-|Unknown iterations|Known iterations|
-|Condition written separately|Initialization, condition, update together|
-|Best for input-driven programs|Best for counting tasks|
-|More flexible|More compact|
-|Common in menu systems|Common in arrays and counting|
-
----
-
-# Syntax Comparison
-
-## While Loop
+### Program
 
 ```
-int i = 1;while(i <= 5) {    System.out.println(i);    i++;}
+Scanner sc = new Scanner(System.in);int a = sc.nextInt();int b = sc.nextInt();if(a > b){    System.out.println(a);}else{    System.out.println(b);}
 ```
 
 ---
 
-## For Loop
+## Alphabet Case Check
+
+### Logic
 
 ```
-for(int i = 1; i <= 5; i++) {    System.out.println(i);}
+A-Z → Uppercasea-z → Lowercase
 ```
 
 ---
 
-# Example: Print 1 to 100
-
-### Using For Loop
+### Program
 
 ```
+char ch = sc.next().charAt(0);if(ch >= 'A' && ch <= 'Z'){    System.out.println("Uppercase");}else{    System.out.println("Lowercase");}
+```
+
+---
+
+## Fibonacci Series
+
+### Example
+
+```
+<<<<<<< HEAD
 for(int i = 1; i <= 100; i++) {    System.out.println(i);}
 ```
 
@@ -583,61 +336,113 @@ Because user decides when to exit.
 
 ```
 ATM SystemMenu Driven ProgramsLogin SystemGame LoopRead Input Until Exit
+=======
+0 1 1 2 3 5 8 13
+>>>>>>> e8e1d63d9395f7f1aebf8b84f177977233f3ddfa
 ```
 
 ---
 
-### For Loop
+### Logic
 
 ```
-Print 1 to 100Display TableTraverse ArrayGenerate ReportsCount Numbers
+first = 0second = 1next = first + second
+```
+
+---
+
+### Program
+
+```
+int a = 0;int b = 1;for(int i=1;i<=10;i++){    System.out.print(a + " ");    int temp = a + b;    a = b;    b = temp;}
+```
+
+---
+
+## Counting Occurrences
+
+### Example
+
+```
+Input Number = 45535Digit = 5Output = 3
+```
+
+---
+
+### Logic
+
+```
+Take last digitCompareCount++Remove last digit
+```
+
+---
+
+### Program
+
+```
+int count = 0;while(num > 0){    int rem = num % 10;    if(rem == 5){        count++;    }    num = num / 10;}
+```
+
+---
+
+## Reverse Number
+
+### Example
+
+```
+Input 1234 Output 4321
+```
+
+---
+
+### Program
+
+```
+int rev = 0;
+while(num > 0)
+{    
+	int rem = num % 10;    
+	rev = rev * 10 + rem;    
+	num = num / 10;
+}
+```
+
+---
+
+## Calculator Program
+
+### Operations
+
+```
++-*/%
+```
+
+---
+
+### Example
+
+```
+char op = sc.next().charAt(0);if(op == '+'){    System.out.println(a+b);}else if(op == '-'){    System.out.println(a-b);}
 ```
 
 ---
 
 # Interview Questions
 
-### Q1. Difference between while and for loop?
-
-**Answer:**
-
-|While|For|
-|---|---|
-|Unknown iterations|Known iterations|
-|Input driven|Counting driven|
-|Condition only|Initialization + Condition + Update|
-
----
-
-### Q2. Which loop is best for printing 1 to 100?
-
-**Answer:** `for` loop.
-
----
-
-### Q3. Which loop is best for an ATM system?
-
-**Answer:** `while` loop.
-
-Because the number of operations is not known beforehand.
+```
+1. What is a control statement?
+2. Difference between if and if-else?
+3. Difference between for and while loop?
+4. Difference between while and do while?
+5. What is an infinite loop?6. How to reverse a number?
+6. How to find Fibonacci numbers?
+7. How to count occurrences of a digit?
+```
 
 ---
 
 # Quick Revision
 
 ```
-While Loop     ↓Unknown IterationsExamples:ATMMenuLoginUser Input
+if → Decision Makingif-else → Two Choiceselse if → Multiple Choicesfor → Known Iterationswhile → Unknown Iterationsdo while → Executes At Least OnceLargest Number → ComparisonFibonacci → Previous Two Numbers SumCount Occurrences → %10 and /10Reverse Number → rev = rev*10 + rem
 ```
-
-```
-For Loop     ↓Known IterationsExamples:1 to 100TablesArraysCounting
-```
-
-# Summary
-
-- Both loops repeat code execution.
-- Use **while** when iterations are unknown.
-- Use **for** when iterations are known.
-- While loops are common in user-driven applications.
-- For loops are common in counting and array processing.
-- Choosing the correct loop improves code readability and efficiency.

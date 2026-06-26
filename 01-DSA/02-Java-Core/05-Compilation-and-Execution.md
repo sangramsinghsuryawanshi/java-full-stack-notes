@@ -21,7 +21,11 @@ javac Main.java
 Source File:
 
 ```
-public class Main {    public static void main(String[] args) {        System.out.println("Hello Java");    }}
+public class Main {    
+	public static void main(String[] args) {        
+		System.out.println("Hello Java");    
+	}
+}
 ```
 
 Save as:
@@ -75,7 +79,11 @@ The compiler:
 ### Source Code
 
 ```
-public class Main {    public static void main(String[] args) {        System.out.println("Hello");    }}
+public class Main {    
+	public static void main(String[] args) {        
+		System.out.println("Hello");    
+	}
+}
 ```
 
 ↓
@@ -164,7 +172,9 @@ class Main is public, should be declared in a file named Main.java
 ## Missing Curly Braces
 
 ```
-public class Main {    public static void main(String[] args)}
+public class Main {    
+	public static void main(String[] args)
+}
 ```
 
 Compilation Error

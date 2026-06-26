@@ -1,4 +1,3 @@
-# Phase 1: Computer Science Fundamentals
 
 ## Topic: Flowcharts & Algorithmic Thinking
 

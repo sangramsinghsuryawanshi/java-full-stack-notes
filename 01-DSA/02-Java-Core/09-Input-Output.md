@@ -44,7 +44,9 @@ System
 Example:
 
 ```
-System.currentTimeMillis();System.exit(0);System.out.println();
+System.currentTimeMillis();
+System.exit(0);
+System.out.println();
 ```
 
 ---
