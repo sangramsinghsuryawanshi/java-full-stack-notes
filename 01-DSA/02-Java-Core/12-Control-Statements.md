@@ -348,7 +348,7 @@ Because user decides when to exit.
 ### While Loop
 
 ```
-ATM SystemMenu Driven ProgramsLogin SystemGame LoopRead Input Until Exit
+ATM SystemMenu Driven ProgramsLogin SystemGame LoopRead Input Until Exit main
 ```
 
 ---
