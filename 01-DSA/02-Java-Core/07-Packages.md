@@ -107,7 +107,8 @@ package com.company.student;public class Student {}
 ### Incorrect
 
 ```
-import java.util.*;package com.company.student;
+import java.util.*;
+package com.company.student;
 ```
 
 This causes a compilation error because the package statement must come first.
@@ -117,7 +118,9 @@ This causes a compilation error because the package statement must come first.
 ### Correct
 
 ```
-package com.company.student;import java.util.*;public class Student {}
+package com.company.student;
+import java.util.*;
+public class Student {}
 ```
 
 ---
@@ -127,7 +130,12 @@ package com.company.student;import java.util.*;public class Student {}
 ### Student.java
 
 ```
-package com.company.student;public class Student {    public void display() {        System.out.println("Student Information");    }}
+package com.company.student;
+	public class Student {    
+		public void display() {        
+		System.out.println("Student Information");    
+	}
+}
 ```
 
 ---
