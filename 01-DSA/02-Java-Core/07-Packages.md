@@ -452,7 +452,8 @@ src/com/company/student
 Wrong:
 
 ```
-import java.util.*;package com.company;
+import java.util.*;
+package com.company;
 ```
 
 ❌ Compilation Error
