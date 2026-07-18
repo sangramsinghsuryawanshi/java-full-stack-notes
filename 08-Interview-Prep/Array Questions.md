@@ -312,7 +312,7 @@ int[] getNumbers() {
 
 ---
 
-## 23. What is the difference between `==` and `Arrays.equals()`?
+## 23. What is the difference between == and `Arrays.equals()`?
 
 ### Answer
 
