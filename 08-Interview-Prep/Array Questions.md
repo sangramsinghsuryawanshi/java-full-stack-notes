@@ -275,7 +275,7 @@ Yes.
 Example:
 
 ```
-Student[] students = new Student[5];
+Student[] students = new Student[10];
 ```
 
 ---
