@@ -365,8 +365,6 @@ O(1)
 
 ### Q: Why is Two Pointer better than nested loops?
 
-Important
-
 Answer:
 
 Because it reduces time complexity from O(n²) to O(n) by processing the array in a single pass while using only O(1) extra space.
