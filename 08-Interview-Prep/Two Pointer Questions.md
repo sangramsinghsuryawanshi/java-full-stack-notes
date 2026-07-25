@@ -246,14 +246,12 @@ true
 - Middle of Linked List
     
 - Happy Number
-    
 
 ### Idea
 
 - slow moves 1 step
     
 - fast moves 2 steps
-    
 
 1
 
