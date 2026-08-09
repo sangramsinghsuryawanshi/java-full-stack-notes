@@ -5,7 +5,7 @@ To run Java programs from any location on your computer, Java must be configured
 Without proper configuration, commands like:
 
 ```
-javajavac
+java javac
 ```
 
 may not work from the Command Prompt or Terminal.
