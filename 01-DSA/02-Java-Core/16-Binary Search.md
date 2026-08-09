@@ -2,7 +2,7 @@
 
 ## Definition
 
-**Binary Search** is a searching algorithm that repeatedly divides a **sorted array** into two halves until the target element is found.
+**Binary Search** is a searching algorithm that repeatedly divides a **sorted array** into two parts until the target element is found.
 
 Instead of checking every element, Binary Search eliminates **half of the remaining elements** after each comparison.
 
@@ -599,11 +599,11 @@ This can cause an infinite loop.
 
 ### 1. What is Binary Search?
 
-A searching algorithm that repeatedly divides a **sorted array** into halves to find a target element.
+A searching algorithm that repeatedly divides a **sorted array** into halves(अर्धे) to find a target element.
 
 ---
 
-### 2. What is the prerequisite for Binary Search?
+### 2. What is the prerequisite(पूर्व-आवश्यकता) for Binary Search?
 
 The array **must be sorted**.
 
