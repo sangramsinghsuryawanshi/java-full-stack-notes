@@ -123,7 +123,19 @@ int[] numbers = {10, 20, 30, 40, 50};
 # 4. Program: Store 5 Roll Numbers
 
 ```
-public class Main {    public static void main(String[] args) {        int[] roll = new int[5];        roll[0] = 101;        roll[1] = 102;        roll[2] = 103;        roll[3] = 104;        roll[4] = 105;        for (int i = 0; i < roll.length; i++) {            System.out.println(roll[i]);        }    }}
+public class Main {    
+	public static void main(String[] args) {        
+		int[] roll = new int[5];        
+		roll[0] = 101;        
+		roll[1] = 102;        
+		roll[2] = 103;        
+		roll[3] = 104;        
+		roll[4] = 105;        
+		for (int i = 0; i < roll.length; i++) {           
+			 System.out.println(roll[i]);        
+		}    
+	}
+}
 ```
 
 Output:
