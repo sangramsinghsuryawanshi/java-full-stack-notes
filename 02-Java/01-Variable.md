@@ -868,7 +868,7 @@ The region of the program where a variable can be accessed.
 
 ### Q9. What is variable shadowing?
 
-When a variable declared in a narrower scope has the same name as a variable in an outer scope, it hides/shadows the outer variable.
+When a variable declared in a narrower scope has the same name as a variable in an outer scope, it hides / shadows the outer variable.
 
 ---
 
