@@ -99,7 +99,7 @@ age = 25;
 
 ---
 
-# 6. Declaration + Initialization
+# 6. Declaration + Initiali	zation
 
 Both can be done together:
 
