@@ -527,7 +527,7 @@ Example:
 ```
 if (true) {
 
-    int x = 10;
+    int x = 20;
 
     System.out.println(x);
 }
