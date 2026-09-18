@@ -41,7 +41,7 @@ Variables allow us to:
 Example:
 
 ```
-int price = 100;
+int price = 1000;
 int quantity = 5;
 
 int total = price * quantity;
@@ -52,7 +52,7 @@ System.out.println(total);
 Output:
 
 ```
-500
+5000
 ```
 
 ---
