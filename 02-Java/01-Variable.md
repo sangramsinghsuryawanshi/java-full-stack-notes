@@ -5,14 +5,14 @@ A **variable** is a named memory location used to store a value that can change 
 ### Example
 
 ```
-int age = 25;
+int age = 22;
 ```
 
 Here:
 
 - `int` → Data type
 - `age` → Variable name
-- `25` → Value
+- `22` → Value
 - `=` → Assignment operator
 
 Think of a variable as a **container that stores data**.
@@ -21,7 +21,7 @@ Think of a variable as a **container that stores data**.
 Variable
    ↓
 ┌─────────────┐
-│     25      │
+│     22      │
 └─────────────┘
     age
 ```
