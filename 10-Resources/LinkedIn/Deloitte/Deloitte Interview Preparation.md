@@ -244,7 +244,8 @@ One of the most immediate, practical places to use this feature is when overridi
 java
 
 ```
-public class Employee {
+public class Employee 
+{
     private String name;
     private int id;
 
