@@ -173,7 +173,8 @@ You combine the type check and the variable declaration into a single, clean exp
 java
 
 ```
-if (obj instanceof String s) {
+if (obj instanceof String s) 
+{
     // 's' is automatically cast and ready to use!
     System.out.println(s.toUpperCase());
 }
