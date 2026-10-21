@@ -74,7 +74,8 @@ java
 
 ```
 // Traditional verbose way before Java 17
-if (obj instanceof String) {
+if (obj instanceof String) 
+{
     String s = (String) obj;
     System.out.println("String length: " + s.length());
 }
