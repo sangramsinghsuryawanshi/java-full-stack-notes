@@ -2123,3 +2123,683 @@ The number of partitions limits the number of consumers in a group that can acti
 8. What is the difference between retry and replay?
 
 Retry attempts a failed message again as part of error handling. Replay deliberately reads or republishes previously retained messages, often for recovery or backfill.
+
+## Q1: What are the key features introduced in Java 8?
+
+### 1. Multi-Level Explanation
+
+- **Level 1 – Beginner:** Java 8 made coding shorter and easier by adding things like Lambdas (arrow functions) and Streams to process lists quickly.
+    
+- **Level 2 – Student:** It introduced Functional Programming paradigms to Java. Key additions include Lambda Expressions, the Stream API, Functional Interfaces, and the new Date/Time API.
+    
+- **Level 3 – Developer:** Java 8 shifted Java from a purely imperative language to a declarative one. It introduced `java.util.stream` for bulk data operations, `Optional` to avoid `NullPointerException`, and Default/Static methods in interfaces to allow backward compatibility.
+    
+- **Level 4 – Senior Developer:** The real power of Java 8 is parallel processing. The Stream API abstracts the Fork/Join framework, allowing developers to utilize multi-core processors trivially via `.parallelStream()`.
+    
+- **Level 5 – Architect:** Beyond syntax, Java 8 radically changed JVM memory architecture. It completely removed the **PermGen** (Permanent Generation) space, which caused frequent `OutOfMemoryError`s, and replaced it with **Metaspace**, which auto-scales using native OS memory, vastly improving deployment stability in cloud-native microservices.
+    
+
+### 2. Core Features (Cheat Sheet)
+
+1. **Lambda Expressions:** `(args) -> { body }`
+    
+2. **Stream API:** Lazy evaluation for collections.
+    
+3. **Functional Interfaces:** `@FunctionalInterface` (e.g., `Predicate`, `Consumer`).
+    
+4. **Default/Static Interface Methods:** Adding methods to interfaces without breaking implementing classes.
+    
+5. **Optional Class:** A container object to cleanly handle nulls.
+    
+6. **New Date/Time API (`java.time`):** Immutable and thread-safe (unlike the old `java.util.Date`).
+    
+7. **Metaspace:** Replaced PermGen memory.
+    
+
+### 3. Interview / Placement Note
+
+**What interviewers expect:** Do not just list the features. Mention _why_ they were introduced (e.g., "Optional was introduced to handle the billion-dollar mistake: NullPointerException. Streams were introduced to write declarative, multicore-ready code.")
+
+## Q2: Difference between `map()` and `flatMap()`
+
+### 1. Core Concept
+
+Both are intermediate operations in the Stream API, but they handle data structures differently.
+
+- **`map()` (Data Transformation):** Takes a Stream of type $T$ and applies a function to transform it into a Stream of type $R$. It is a **One-to-One** mapping.
+    
+- **`flatMap()` (Data Flattening):** Takes a Stream of type $T$ and transforms each element into a _Stream_ of type $R$, then "flattens" all those distinct streams into a single Stream of type $R$. It is a **One-to-Many** mapping.
+    
+
+### 2. Internal ASCII Visualization
+
+**`map()` Visualization:**
+
+Code snippet
+
+```
+[ [1, 2], [3, 4] ]  ---> map( x -> x ) ---> [ [1, 2], [3, 4] ] (Structure Remains)
+```
+
+**`flatMap()` Visualization:**
+
+Code snippet
+
+```
+[ [1, 2], [3, 4] ]  ---> flatMap( x -> x.stream() ) ---> [ 1, 2, 3, 4 ] (Flattened)
+```
+
+### 3. Production Code Example
+
+Java
+
+```
+// Scenario: We have a list of Users, and each User has a List of Phone Numbers.
+List<User> users = getEnterpriseUsers();
+
+// Using map(): Returns a List of Lists (List<List<String>>)
+List<List<String>> nestedPhones = users.stream()
+    .map(User::getPhoneNumbers)
+    .collect(Collectors.toList());
+
+// Using flatMap(): Returns a single flattened List (List<String>)
+List<String> allPhones = users.stream()
+    .flatMap(user -> user.getPhoneNumbers().stream())
+    .collect(Collectors.toList());
+```
+
+### 4. Real Project Usage
+
+- **E-Commerce (Amazon):** Extracting all item IDs from a list of Orders (where one Order contains multiple Items). `flatMap` flattens the `Order -> List<Item>` relationship into a single `Stream<Item>`.
+    
+
+## Q3: What are Intermediate and Terminal operations in Stream API?
+
+### 1. Definition
+
+The Stream API operates as a pipeline.
+
+- **Intermediate Operations:** Operations that transform a stream into another stream. They are **Lazy**—they do not execute until a terminal operation is called. (e.g., `filter()`, `map()`, `sorted()`).
+    
+- **Terminal Operations:** Operations that trigger the execution of the pipeline and produce a non-stream result (like a `List`, `Integer`, or `void`). Once a terminal operation executes, the stream is **closed** and cannot be reused. (e.g., `collect()`, `forEach()`, `reduce()`, `count()`).
+    
+
+### 2. Internal Working (Lazy Evaluation)
+
+When you chain `filter().map()`, the JVM does _not_ loop through the data twice. It builds an internal pipeline recipe. When `collect()` (terminal) is called, the JVM pushes the data through the entire pipeline in a single pass (fusion). This $\mathcal{O}(N)$ optimization saves massive CPU cycles in large datasets.
+
+### 3. Common Mistakes
+
+- **Beginner Mistake:** Trying to reuse a stream.
+    
+
+Java
+
+```
+Stream<String> s = list.stream();
+s.forEach(System.out::println); // Stream is now closed
+s.count(); // Throws IllegalStateException: stream has already been operated upon or closed
+```
+
+## Q4: Functional Interface vs Marker Interface
+
+### 1. Comparison Table
+
+|**Feature**|**Functional Interface**|**Marker Interface**|
+|---|---|---|
+|**Definition**|An interface with **exactly one** abstract method (SAM).|An interface with **no methods** or fields.|
+|**Purpose**|To enable Lambda expressions and method references.|To tag a class to give a special instruction to the JVM/Compiler.|
+|**Annotation**|`@FunctionalInterface` (Optional but recommended).|None (Handled internally by JVM logic).|
+|**Examples**|`Runnable`, `Callable`, `Predicate<T>`, `Consumer<T>`.|`Serializable`, `Cloneable`, `Remote`.|
+|**Modern Java Trend**|Heavily used in modern declarative Java.|Largely replaced by **Annotations** (e.g., `@Entity`, `@Deprecated`).|
+
+### 2. Architect Level Insight
+
+Marker interfaces are considered a legacy pattern. In early Java, we used `implements Serializable` to tell the JVM's ObjectOutputStream that this object is safe to serialize. Today, custom Annotations using the Reflection API are the industry standard for metadata tagging (e.g., Spring Boot's `@Component`).
+
+## Q5: Can we overload the `main()` method? Which one does JVM execute?
+
+### 1. Answer
+
+**Yes, we can absolutely overload the `main()` method.** Standard Java method overloading rules apply. However, **the JVM will always execute the specific signature:** `public static void main(String[] args)`.
+
+### 2. Code Example
+
+Java
+
+```
+public class MainOverload {
+    // 1. THIS IS THE ONE THE JVM CALLS
+    public static void main(String[] args) {
+        System.out.println("JVM Entry Point");
+        main(10); // Manually calling the overloaded method
+    }
+
+    // 2. Overloaded main
+    public static void main(int x) {
+        System.out.println("Overloaded main with int: " + x);
+    }
+    
+    // 3. Overloaded main
+    public static void main(String arg1, String arg2) {
+        System.out.println("Overloaded main with two strings");
+    }
+}
+```
+
+### 3. Interview Follow-Up
+
+- **Q:** What if we change `String[] args` to `String... args` (varargs)?
+    
+- **A:** It will still work perfectly! The JVM recognizes `public static void main(String... args)` as a valid entry point because varargs are compiled down to arrays under the hood.
+    
+
+## Q6: Difference between `this` and `super` keywords
+
+### 1. Core Concept
+
+- **`this`:** A reference variable that points to the **current object** (the instance whose method or constructor is being invoked).
+    
+- **`super`:** A reference variable used to refer to the **immediate parent class** object.
+    
+
+### 2. Primary Use Cases
+
+|**Use Case**|**this Keyword**|**super Keyword**|
+|---|---|---|
+|**Shadowing**|`this.name = name;` (distinguishes instance var from local var).|`super.name` (accesses hidden parent variable).|
+|**Methods**|`this.print();` (calls current class method).|`super.print();` (calls overridden parent method).|
+|**Constructors**|`this(10);` (calls another constructor in the _same_ class).|`super(10);` (calls parent class constructor).|
+
+### 3. Internal Memory Diagram (Mental Model)
+
+When an object is created on the **Heap**, it contains the state of its class AND its parent class. `this` and `super` are simply memory pointers residing in the **Stack** during method execution. `this` points to the entire object boundaries, while `super` acts as a restricted lens, only allowing visibility to the parent's contract of that exact same object.
+
+### 4. Production Rule
+
+Constructor chaining (`this()` or `super()`) must _always_ be the very first statement inside a constructor. You cannot use both in the same constructor.
+
+## Q7: How do you create and handle custom exceptions?
+
+### 1. Industry Standard Practice
+
+In enterprise applications (like Spring Boot microservices), we almost exclusively create **Unchecked Exceptions** (extending `RuntimeException`). Checked exceptions (extending `Exception`) force boilerplate `try-catch` blocks and pollute method signatures, which violates Clean Code principles in modern layered architectures.
+
+### 2. Production Ready Implementation
+
+**Step 1: Create the Custom Exception**
+
+Java
+
+```
+/**
+ * Custom exception for handling specific domain errors.
+ * Extends RuntimeException to avoid polluting method signatures.
+ */
+public class UserNotFoundException extends RuntimeException {
+    
+    private final String errorCode;
+
+    public UserNotFoundException(String message, String errorCode) {
+        super(message); // Passes message to parent class
+        this.errorCode = errorCode;
+    }
+
+    public String getErrorCode() {
+        return errorCode;
+    }
+}
+```
+
+**Step 2: Throwing the Exception in the Service Layer**
+
+Java
+
+```
+public User fetchUser(String userId) {
+    return userRepository.findById(userId)
+        .orElseThrow(() -> new UserNotFoundException(
+            "User with ID " + userId + " does not exist.", "ERR_USER_404"
+        ));
+}
+```
+
+**Step 3: Handling it Globally (Spring Boot Example)** Instead of writing `try-catch` everywhere, enterprise apps use Global Exception Handlers.
+
+Java
+
+```
+@ControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleUserNotFound(UserNotFoundException ex) {
+        ErrorResponse error = new ErrorResponse(ex.getErrorCode(), ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+}
+```
+
+### 3. Debugging & Security Considerations
+
+- **Security Risk:** Never expose stack traces or raw database exceptions (like `SQLException`) to the client-side API response. It reveals internal architecture to attackers.
+    
+- **Prevention:** Custom exceptions act as a secure translation layer. Catch `SQLException` internally, and throw a custom `DataProcessingException("Unable to process request")` to the user.
+## Master Interview Guide: Concurrency & Internals
+
+### Q1: Difference between `Runnable` and `Callable`
+
+**1. Multi-Level Explanation**
+
+- **Level 1 – Beginner:** Both are used to create tasks for threads. `Runnable` does the job but gives nothing back. `Callable` does the job and returns a result.
+    
+- **Level 2 – Student:** `Runnable` is a legacy interface (Java 1.0) with a `void run()` method. `Callable` was introduced in Java 5 (`java.util.concurrent`) with a `V call()` method that returns a generic type.
+    
+- **Level 3 – Developer:** `Runnable` cannot throw checked exceptions, forcing you to handle them internally. `Callable` can throw checked exceptions (`throws Exception`), making it cleaner for operations like file I/O or network calls.
+    
+- **Level 4 – Senior Developer:** We never use raw Threads anymore. We submit these tasks to an `ExecutorService`. Submitting a `Callable` returns a `Future<T>` object, allowing the main thread to block and wait for the result using `future.get()`.
+    
+- **Level 5 – Architect:** In high-throughput reactive systems, even `Callable` blocks the thread when calling `.get()`. Modern architectures map `Callable` tasks to `CompletableFuture` for non-blocking, event-driven, scatter-gather microservice orchestration.
+    
+
+**2. Comparison Table**
+
+|**Feature**|**Runnable**|**Callable**|
+|---|---|---|
+|**Method**|`public void run()`|`public V call() throws Exception`|
+|**Return Type**|`void`|`V` (Generic Type)|
+|**Exception Handling**|Cannot throw checked exceptions|Can throw checked exceptions|
+|**Package**|`java.lang`|`java.util.concurrent`|
+|**Usage Pattern**|Fire-and-forget background tasks|Tasks where a result is required|
+
+**3. Production Code Example**
+
+Java
+
+```
+ExecutorService executor = Executors.newFixedThreadPool(2);
+
+// Runnable: Fire and Forget
+executor.execute(() -> {
+    System.out.println("Processing background cleanup...");
+});
+
+// Callable: Return a result
+Future<Integer> future = executor.submit(() -> {
+    Thread.sleep(1000);
+    return 200; // Returns HTTP Status equivalent
+});
+
+try {
+    Integer status = future.get(); // Blocks until Callable finishes
+    System.out.println("Task completed with status: " + status);
+} catch (Exception e) {
+    e.printStackTrace();
+}
+```
+
+### Q2: Difference between `start()` and `run()`
+
+**1. Core Concept**
+
+- **`start()`:** Creates a brand-new OS-level thread, allocates a new call stack, and then the JVM invokes the `run()` method inside that new thread.
+    
+- **`run()`:** Does **not** create a new thread. It simply executes synchronously in the exact same call stack as the thread that invoked it.
+    
+
+**2. Internal Memory Architecture (ASCII Visualization)**
+
+**Scenario A: Calling `thread.start()`**
+
+Code snippet
+
+```
+[ Main Thread Stack ]       [ NEW Worker Thread Stack ]
+|                   |       |                         |
+| thread.start()    | ----> | run() method executes   |
+| System.out...     |       | helperMethod()          |
+---------------------       ---------------------------
+* Asynchronous execution (parallel)
+```
+
+**Scenario B: Calling `thread.run()` directly**
+
+Code snippet
+
+```
+[ Main Thread Stack ]       
+|                   |       
+| run() method      | <-- Executes here! Blocks main thread.
+| thread.run()      |       
+| System.out...     |       
+---------------------       
+* Synchronous execution (sequential)
+```
+
+**3. Common Mistakes**
+
+- **Beginner Mistake:** Directly calling `.run()` and wondering why the application UI is freezing.
+    
+- **Production Mistake:** Calling `.start()` twice on the same thread object. This throws an `IllegalThreadStateException`. A thread lifecycle is strictly one-way (New $\rightarrow$ Runnable $\rightarrow$ Running $\rightarrow$ Dead).
+    
+
+### Q3: Difference between `wait()` and `sleep()`
+
+**1. Core Concept** Both pause execution, but they serve entirely different architectural purposes.
+
+- **`wait()`** is used for **Inter-Thread Communication**. It tells the current thread to release its lock on the object and go to sleep until another thread calls `notify()` or `notifyAll()` on that same object.
+    
+- **`sleep()`** is used for **Time Delay**. It pauses the thread for a specific duration but **holds onto the lock**.
+    
+
+**2. Comparison Table**
+
+|**Feature**|**wait()**|**sleep()**|
+|---|---|---|
+|**Class Origin**|`java.lang.Object` (It acts on the monitor lock)|`java.lang.Thread` (It acts on the thread itself)|
+|**Lock Status**|**Releases** the lock.|**Retains** the lock.|
+|**Context**|Must be called inside a `synchronized` block.|Can be called anywhere.|
+|**Wake Up**|Wakes via `notify()`, `notifyAll()`, or timeout.|Wakes when time expires or interrupted.|
+
+**3. Debugging Guide: `IllegalMonitorStateException`**
+
+- **Root Cause:** You called `wait()` or `notify()` on an object without wrapping it in a `synchronized(object)` block first. You cannot release a lock you do not own.
+    
+- **Fix:**
+    
+    Java
+    
+    ```
+    synchronized(sharedResource) {
+        sharedResource.wait(); // Correct usage
+    }
+    ```
+    
+
+### Q4: What is synchronization in Java?
+
+**1. Multi-Level Explanation**
+
+- **Level 1 – Beginner:** It’s a traffic light for threads. It ensures that only one thread can access a shared resource (like updating a bank balance) at a time to prevent data corruption.
+    
+- **Level 2 – Student:** Synchronization is achieved using the `synchronized` keyword. It prevents race conditions by enforcing mutually exclusive access to shared data using intrinsic locks (monitor locks) present in every Java object.
+    
+- **Level 3 – Developer:** You can synchronize at the method level (`public synchronized void update()`) or block level (`synchronized(this) { ... }`). Block level is preferred because it narrows the critical section, improving throughput.
+    
+- **Level 4 – Senior Developer:** Standard `synchronized` blocks can lead to deadlocks and poor performance under high contention. We often replace them with `java.util.concurrent.locks.ReentrantLock`, which offers `tryLock()` capabilities, fairness policies, and interruptible locks.
+    
+- **Level 5 – Architect:** Synchronization solves the "Atomicity" problem, but you also must consider the "Visibility" problem (handled by the `volatile` keyword or synchronization). In distributed microservices, JVM-level synchronization is useless across multiple server nodes; you must use distributed locks (Redis/Redisson or ZooKeeper) instead.
+    
+
+**2. Real Project Usage (Banking App)** If two threads try to deduct ₹500 from a ₹1000 balance simultaneously without synchronization, both might read ₹1000, deduct ₹500, and write ₹500. The final balance is ₹500 instead of ₹0. Synchronization forces Thread 2 to wait until Thread 1 finishes the read-modify-write cycle.
+
+### Q5: Explain Java memory areas: Heap, Stack, Method Area, and Program Counter.
+
+**1. Memory Architecture Diagram**
+
+Code snippet
+
+```
+========================================================================
+                          JVM MEMORY SPACES
+========================================================================
+      SHARED AMONG ALL THREADS       |   PER-THREAD ALLOCATION
+-------------------------------------|----------------------------------
+ [ METHOD AREA (Metaspace) ]         |  [ THREAD 1 STACK ]
+  - Class Metadata                   |   - Local primitive variables
+  - Static Variables                 |   - Object References
+  - Constant Pool                    |   - Method Call Frames
+                                     |
+ [ HEAP MEMORY ]                     |  [ PC REGISTER (Thread 1) ]
+  - All Object Instances (new)       |   - Address of current instruction
+  - Arrays                           |   
+  - Managed by Garbage Collector     |  [ NATIVE METHOD STACK ]
+                                     |   - C/C++ native calls
+========================================================================
+```
+
+**2. Detailed Breakdown**
+
+- **Heap:** The massive pool of memory where all class instances and arrays are allocated. It is shared across all threads. If this fills up, you get `OutOfMemoryError: Java heap space`.
+    
+- **Stack:** Every time a thread is created, a JVM Stack is created for it. It stores local variables and method call frames. It is thread-safe by nature because no other thread can access it. If recursion goes too deep, you get `StackOverflowError`.
+    
+- **Method Area (Metaspace in Java 8+):** Stores class structures (metadata), static variables, and the runtime constant pool. Prior to Java 8, this was called PermGen (Permanent Generation) and lived in the Heap, frequently causing OOM errors. Now, it lives in native OS memory.
+    
+- **Program Counter (PC) Register:** Contains the memory address of the JVM instruction currently being executed by its specific thread.
+    
+
+### Q6: What is garbage collection? What is the purpose of `finalize()`?
+
+**1. Core Concept: Garbage Collection (GC)** Garbage Collection is a daemon thread in the JVM that automatically reclaims memory by deleting objects that are no longer reachable by any live thread (no active references point to them).
+
+- **Mechanism:** It uses a "Mark and Sweep" algorithm. It pauses application threads (Stop-The-World event), traces all references starting from GC Roots (local variables, static variables), marks live objects, and sweeps (deletes) the unreferenced ones.
+    
+- **Modern Implementations:** G1GC (default in modern Java) and ZGC (ultra-low latency, sub-millisecond pauses for massive heaps).
+    
+
+**2. The `finalize()` Method (And Why You Should Never Use It)**
+
+- **Historical Purpose:** `finalize()` is a method in the `Object` class. Before the GC destroys an object, it calls `finalize()`, giving the object one last chance to clean up resources (like closing database connections or file streams).
+    
+- **The Reality:** It is unpredictable. You never know _when_ the GC will run, meaning your critical system resources might be held hostage indefinitely waiting for `finalize()` to trigger. Furthermore, a poorly written `finalize()` can "resurrect" an object by creating a new reference to it, breaking the GC process.
+    
+- **Current Status:** **Deprecated since Java 9.**
+    
+
+**3. Enterprise Best Practice (Replacement for `finalize()`)** Never rely on the Garbage Collector to close system resources. Implement the `AutoCloseable` interface and use the **Try-with-Resources** block introduced in Java 7. This guarantees the resource is released the exact microsecond the block finishes executing.
+
+Java
+
+```
+// Production standard for resource cleanup
+try (FileInputStream fis = new FileInputStream("data.txt")) {
+    // Read data
+} catch (IOException e) {
+    // Handle error
+} 
+// fis.close() is called automatically right here, deterministically.
+```
+
+
+## Master Interview Guide: Coding & Advanced SQL
+
+### Q1: Find the minimum-length subarray whose sum equals a given target.
+
+**1. Multi-Level Explanation**
+
+- **Level 1 – Beginner:** We need to find a continuous block of numbers in a list that adds up to a specific target number, and we want the shortest block possible.
+    
+- **Level 2 – Student:** A brute-force approach checks every possible subarray using nested loops, which takes $\mathcal{O}(N^2)$ time. We can optimize this using data structures.
+    
+- **Level 3 – Developer:** If the array contains only positive integers, we use a **Sliding Window** (Two Pointers) in $\mathcal{O}(N)$ time. If it contains negative numbers, the window might need to expand and shrink unpredictably, so we use the **Prefix Sum + HashMap** pattern.
+    
+- **Level 4 – Senior Developer:** The Prefix Sum approach maintains a running total. At any index `i`, if `currentSum - target` exists in our HashMap, it means the subarray between that past index and `i` equals the target. We store `(PrefixSum, Index)` in the map.
+    
+- **Level 5 – Architect:** In streaming data applications (like real-time log analysis or financial tick data), we cannot hold the entire array in memory. We maintain a rolling Prefix Sum map bounded by time or size, processing $\mathcal{O}(1)$ lookups per incoming event stream to trigger real-time alerts.
+    
+
+**2. Approach: Prefix Sum + HashMap (Handles Negative Numbers)** To find the _minimum_ length, whenever we encounter a prefix sum we've seen before, we want to update the HashMap with the **latest** index. This ensures the distance between the matched prefix sum and our current index is as small as possible.
+
+**3. Dry Run / Visualization**`Array: [2, -1, 2, 1, 4, -1]` | `Target: 3`
+
+|**Index (i)**|**Value**|**Curr Sum**|**Target Check (Curr - 3)**|**HashMap State (Sum → Index)**|**Min Length**|
+|---|---|---|---|---|---|
+|Initial|-|0|-|`{0: -1}` (Base case)|$\infty$|
+|0|2|2|2 - 3 = -1 (Not in map)|`{0:-1, 2:0}`|$\infty$|
+|1|-1|1|1 - 3 = -2 (Not in map)|`{0:-1, 2:0, 1:1}`|$\infty$|
+|2|2|3|3 - 3 = 0 (Found at idx -1)|`{..., 3:2}`|`2 - (-1) = 3`|
+|3|1|4|4 - 3 = 1 (Found at idx 1)|`{..., 4:3}`|`min(3, 3 - 1) = 2`|
+|4|4|8|8 - 3 = 5 (Not in map)|`{..., 8:4}`|2|
+|5|-1|7|7 - 3 = 4 (Found at idx 3)|`{..., 7:5}`|`min(2, 5 - 3) = 2`|
+
+**Final Answer:** Minimum length is `2`. (Subarray: `[2, 1]`)
+
+**4. Production-Ready Java Solution**
+
+Java
+
+```
+import java.util.HashMap;
+import java.util.Map;
+
+public class SubarraySumOptimizer {
+
+    /**
+     * Finds the minimum length of a contiguous subarray that sums to the target.
+     * Time Complexity: O(N)
+     * Space Complexity: O(N)
+     */
+    public static int minSubArrayLen(int[] nums, int target) {
+        if (nums == null || nums.length == 0) return 0;
+
+        // Map stores <PrefixSum, Latest_Index>
+        Map<Integer, Integer> prefixSumMap = new HashMap<>();
+        prefixSumMap.put(0, -1); // Base case: allows subarray starting at index 0
+
+        int currentSum = 0;
+        int minLength = Integer.MAX_VALUE;
+
+        for (int i = 0; i < nums.length; i++) {
+            currentSum += nums[i];
+
+            int requiredPrefix = currentSum - target;
+            if (prefixSumMap.containsKey(requiredPrefix)) {
+                int previousIndex = prefixSumMap.get(requiredPrefix);
+                minLength = Math.min(minLength, i - previousIndex);
+            }
+
+            // Always update with the latest index to ensure MINIMUM length in future matches
+            prefixSumMap.put(currentSum, i);
+        }
+
+        return minLength == Integer.MAX_VALUE ? 0 : minLength;
+    }
+}
+```
+
+### Q2: Write an SQL query to rank employees based on their experience.
+
+**1. Core Concept** To rank rows without aggregating them into a single output row, we use **Window Functions**. Experience is typically determined by the `hire_date` (the older the date, the more experienced) or `years_of_experience` (highest number first).
+
+**2. Production SQL Query** Assuming a table `employees` with columns `emp_id`, `emp_name`, and `hire_date`.
+
+SQL
+
+```
+SELECT 
+    emp_id, 
+    emp_name, 
+    hire_date,
+    RANK() OVER (ORDER BY hire_date ASC) AS experience_rank
+FROM 
+    employees
+ORDER BY 
+    experience_rank;
+```
+
+**3. Enterprise Architecture Context** In real ERP systems (like Workday or SAP), you often need to rank employees _within their specific departments_. We achieve this by adding the `PARTITION BY` clause:
+
+SQL
+
+```
+SELECT 
+    emp_id, 
+    department_id,
+    emp_name, 
+    hire_date,
+    RANK() OVER (PARTITION BY department_id ORDER BY hire_date ASC) AS dept_experience_rank
+FROM 
+    employees;
+```
+
+### Q3: Difference between `RANK()`, `DENSE_RANK()`, and `ROW_NUMBER()`
+
+**1. Multi-Level Explanation**
+
+- **Level 1 – Beginner:** They all assign a number to rows based on an order. The difference is how they handle ties (people with the exact same value).
+    
+- **Level 2 – Student:** `ROW_NUMBER` gives a unique ID to every row. `RANK` gives tied rows the same number but skips the next numbers. `DENSE_RANK` gives tied rows the same number but does _not_ skip numbers.
+    
+- **Level 3 – Developer:** These are Window Functions executed during the projection phase of the SQL lifecycle. Choosing the wrong one breaks pagination algorithms.
+    
+- **Level 4 – Architect:** In microservice reporting layers, using `DENSE_RANK()` is critical when building leaderboards (e.g., Gaming or Sales targets). If two sales reps tie for 1st place, the next rep must be 2nd place, not 3rd.
+    
+
+**2. Visual Comparison Table (Given Salary Data)**
+
+|**Employee**|**Salary**|**ROW_NUMBER()**|**RANK()**|**DENSE_RANK()**|
+|---|---|---|---|---|
+|Alice|$90,000|1|1|1|
+|Bob|$90,000|2|1|1|
+|Charlie|$80,000|3|3|2|
+|Dave|$75,000|4|4|3|
+|Eve|$75,000|5|4|3|
+|Frank|$70,000|6|6|4|
+
+**3. Key Takeaways:**
+
+- **`ROW_NUMBER()`:** Never repeats. Never skips. (1, 2, 3, 4, 5, 6)
+    
+- **`RANK()`:** Repeats on ties. Skips subsequent ranks. (1, 1, 3, 4, 4, 6)
+    
+- **`DENSE_RANK()`:** Repeats on ties. Never skips. (1, 1, 2, 3, 3, 4)
+    
+
+### Q4: Explain the order of execution of SQL query clauses.
+
+**1. Lexical vs. Logical Order** The way we _write_ SQL (Lexical order) is completely different from how the Database Engine (PostgreSQL, MySQL, Oracle) _executes_ it (Logical order). Understanding this execution pipeline is the secret to query optimization and debugging.
+
+**2. The Execution Pipeline (Step-by-Step)**
+
+Code snippet
+
+```
+1. FROM / JOIN     : Load and merge the base data tables.
+       ↓
+2. WHERE           : Filter the base rows (cannot use aggregate functions here).
+       ↓
+3. GROUP BY        : Bucket the remaining rows into aggregated groups.
+       ↓
+4. HAVING          : Filter the bucketed groups (can use aggregate functions here).
+       ↓
+5. SELECT          : Extract the requested columns and evaluate expressions/aliases.
+       ↓
+6. DISTINCT        : Remove duplicate rows from the selected output.
+       ↓
+7. ORDER BY        : Sort the final result set.
+       ↓
+8. LIMIT / OFFSET  : Truncate the sorted results for pagination.
+```
+
+**3. Debugging Guide based on Execution Order**
+
+**Common Error:** `Column 'total_sales' does not exist`
+
+SQL
+
+```
+-- WRONG
+SELECT sum(amount) AS total_sales
+FROM orders
+WHERE total_sales > 1000; 
+```
+
+- **Root Cause:** You tried to use the alias `total_sales` in the `WHERE` clause.
+    
+- **Explanation:** Look at the pipeline. `WHERE` executes at Step 2. `SELECT` (where the alias is created) doesn't execute until Step 5. When `WHERE` is running, `total_sales` does not exist in memory yet.
+    
+- **Fix:** Use the raw aggregate in the `HAVING` clause (Step 4), or wrap the query in a CTE (Common Table Expression).
+    
+
+SQL
+
+```
+-- CORRECT
+SELECT sum(amount) AS total_sales
+FROM orders
+GROUP BY customer_id
+HAVING sum(amount) > 1000;
+```
+
+**4. Performance Considerations (Architect Level)** Because `FROM/JOIN` and `WHERE` execute first, you must filter your data _before_ joining massive tables whenever possible. Pushing filters down the execution plan reduces the memory footprint passed to the `JOIN` and `GROUP BY` phases, drastically lowering memory consumption (Space Complexity) and I/O reads (Time Complexity) in enterprise databases.
