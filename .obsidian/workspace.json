@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "10-Resources/LinkedIn/NTTDATA/NTTDATA Interview Preparation.md",
+                "file": "10-Resources/LinkedIn/Deloitte/Deloitte Interview Preparation.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "NTTDATA Interview Preparation"
+              "title": "Deloitte Interview Preparation"
             }
           }
         ]
@@ -188,12 +188,12 @@
       "bases:Create new base": false
     }
   },
-  "active": "d0ef82acb6c2b9f9",
+  "active": "ff52c6f9dea5bc7b",
   "lastOpenFiles": [
-    "10-Resources/LinkedIn/Deloitte/Deloitte Interview Preparation.md",
-    "10-Resources/LinkedIn/NTTDATA/NTTDATA Interview Preparation.md",
-    "10-Resources/LinkedIn/NTTDATA",
     "10-Resources/LinkedIn/VKTechno Solutions Pvt Ltd/VKTechno Solutions Pvt Ltd Interview Preparation.md",
+    "10-Resources/LinkedIn/NTTDATA/NTTDATA Interview Preparation.md",
+    "10-Resources/LinkedIn/Deloitte/Deloitte Interview Preparation.md",
+    "10-Resources/LinkedIn/NTTDATA",
     "10-Resources/LinkedIn/Untitled.md",
     "10-Resources/LinkedIn/VKTechno Solutions Pvt Ltd"
   ]
