@@ -27,7 +27,8 @@ public sealed class Payment
 Allowed:
 
 ```
-public final class CardPayment extends Payment {}
+public final class CardPayment extends Payment {
+}
 ```
 
 ```
