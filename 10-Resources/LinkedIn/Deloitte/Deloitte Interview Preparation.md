@@ -31,7 +31,8 @@ public final class CardPayment extends Payment {}
 ```
 
 ```
-public final class UPIPayment extends Payment {}
+public final class UPIPayment extends Payment {
+}
 ```
 
 A class not listed in `permits` cannot extend `Payment`.
